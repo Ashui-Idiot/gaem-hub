@@ -1,0 +1,24 @@
+{
+  "name": "gaem-hub",
+  "version": "1.0.0",
+  "description": "gaems",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "packWin": "electron-builder build --win"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/local-idiot/zombiegaem.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/local-idiot/zombiegaem/issues"
+  },
+  "homepage": "https://github.com/local-idiot/zombiegaem#readme",
+  "devDependencies": {
+    "electron": "^13.1.5",
+    "electron-builder": "^22.11.7"
+  }
+}

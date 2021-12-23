@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<title>gaem hub</title>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+    body {
+      background-color: #8be4ff;
+    }
+		canvas {
+			border: 1px solid #d3d3d3;
+			background-color: #f1f1f1;
+		}
+    .button {
+    height: 40px;
+    width: 200px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 51px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .button.primary {
+    background: #146aff;
+    color: white;
+    border-bottom: 4px solid #004cc9;
+    margin: 20px 0 0;
+    transition: .5s all;
+  }
+  
+  .button.primary:hover {
+    background: #004cc9;
+  }
+	</style>
+
+</head>
+<body>
+  <h1 style="font-family: Arial, Helvetica, sans-serif; text-align: center;">
+  Welcome to the game hub.
+  </h1>
+  <p style="font-family: Arial, Helvetica, sans-serif; text-align: center;">
+  What game would you like to play?
+  </p>
+  <a href="./zombie.html"; style="text-align: center;">
+    <button>Zombie Shooter</button>
+  </a>
+  <p></p>
+  <a href="./hangman.html"; style="text-align: center;">
+    <button>hangman</button>
+  </a>
+<p></p>
+</body>
+<script>
+  if(app.isPackaged && !process.argv.includes('--dev')) {Menu.setApplicationMenu(null)}
+  if(!app.isPackaged || process.argv.includes('--dev')) {Menu.setApplicationMenu(dev)}
+</script>

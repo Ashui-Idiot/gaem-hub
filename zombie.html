@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<title> zombie gaem </title>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		canvas {
+			border: 1px solid #d3d3d3;
+			background-color: #f1f1f1;
+		}
+	</style>
+
+</head>
+<link rel="shortcut icon" type="image/jpg" href="/zombieRight.png"/>
+<body onLoad="startGame()">
+
+<!--
+  <p id="stateOlife">State of Life: Alive</p>
+  <button onClick="startGame()">Restart Button</button>
+-->
+<p id="ZombieScore">Kills: <span id="zombsIG"></span></p>
+</body>
+	<script>
+let boxMomentLol;
+let pewPew;
+let lastDirect = 1;
+let sandbag1;
+let sandbag2;
+let zombie1;
+let zombie2;
+let zombie3;
+let zombie4;
+let zombiesKilled = 0
+let preLoading1;
+let preLoading2;
+let preLoading3;
+let preLoading4;
+let preLoading5;
+let preLoading6;
+let preLoading7;
+let preLoading8;
+
+function nextLevel() {
+  window.location.replace("./gaem/level1-ask/");
+}
+/*
+var x = document.getElementById("stateOlife")
+if (dead === 1) {
+  x.innerHTML = "State Of Life: Dead"
+}
+*/
+async function startGame() {
+    boxMomentLol = new component(30, 30, "./charLeft.png", 210, 9, "image");
+    pewPew = new component(10, 10, "./bulletLeft.png", 1000, 1000, "image");
+    sandbag1 = new componentZom(15, 270, "./sandbag.png", 250, 0, "image");
+    sandbag2 = new componentZom(15, 270, "./sandbag.png", 185, 0, "image");
+    zombie1 = new componentZom(30, 30, "./zombieLeft.png", 480, 9, "image");
+    zombie2 = new componentZom(30, 30, "./zombieLeft.png", 480, 219, "image"); 
+    zombie3 = new componentZom(30, 30, "./zombieRight.png", -30, 9, "image");
+    zombie4 = new componentZom(30, 30, "./zombieRight.png", -30, 219, "image");   
+    preLoading1 = new component(10, 10, "./zombieLeftMid.png", 1000, 1000, "image");
+    preLoading2 = new component(10, 10, "./zombieLeftTop.png", 1000, 1000, "image");
+    preLoading3 = new component(10, 10, "./zombieRightMid.png", 1000, 1000, "image");
+    preLoading4 = new component(10, 10, "./zombieRightTop.png", 1000, 1000, "image");
+    preLoading5 = new component(10, 10, "./charRightFlash.png", 1000, 1000, "image");
+    preLoading6 = new component(10, 10, "./charRightTopFlash.png", 1000, 1000, "image");
+    preLoading7 = new component(10, 10, "./charLeftFlash.png", 1000, 1000, "image");
+    preLoading8 = new component(10, 10, "./charLeftTopFlash.png", 1000, 1000, "image");
+    myGameArea.start();
+    await sleep(2000)
+    animationState = 0
+    zombie1.speedX = -0.1
+    zombie2.speedX = -0.1
+    zombie3.speedX = 0.1
+    zombie4.speedX = 0.1
+    dead = 0
+    useFunc = 1
+    // x.innerHTML = "State Of Life: Alive"
+}
+// #b5a32b is the sandbag color
+// #025c00 is the zombie color
+//animation stuff
+let animationState = 1
+async function animation() {
+  await sleep(200)
+  zombie1.image.src = "./zombieLeftMid.png"
+  zombie2.image.src = "./zombieLeftMid.png"
+  zombie3.image.src = "./zombieRightMid.png"
+  zombie4.image.src = "./zombieRightMid.png"
+  await sleep(200)
+  zombie1.image.src = "./zombieLeftTop.png"
+  zombie2.image.src = "./zombieLeftTop.png"
+  zombie3.image.src = "./zombieRightTop.png"
+  zombie4.image.src = "./zombieRightTop.png"
+  await sleep(400)
+  zombie1.image.src = "./zombieLeftMid.png"
+  zombie2.image.src = "./zombieLeftMid.png"
+  zombie3.image.src = "./zombieRightMid.png"
+  zombie4.image.src = "./zombieRightMid.png"
+  await sleep(100)
+  zombie1.image.src = "./zombieLeft.png"
+  zombie2.image.src = "./zombieLeft.png"
+  zombie3.image.src = "./zombieRight.png"
+  zombie4.image.src = "./zombieRight.png"
+  await sleep(200)
+  animationState = 0
+}
+//0 for 1 and 2, 1 for 3 and 4
+async function shootAnim(side) {
+  if (side === 0) {
+    boxMomentLol.image.src = "./charLeftFlash.png"
+    await sleep(100)
+    boxMomentLol.image.src = "./charLeftTopFlash.png"
+    await sleep(200)
+    boxMomentLol.image.src = "./charLeft.png"
+  }
+  if (side === 1) {
+    boxMomentLol.image.src = "./charRightFlash.png"
+    await sleep(100)
+    boxMomentLol.image.src = "./charRightTopFlash.png"
+    await sleep(200)
+    boxMomentLol.image.src = "./charRight.png"
+  }
+} 
+
+let myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 480;
+        this.canvas.height = 270;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, 20);
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    if (type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+    }
+    this.width = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;    
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (type === "image") {
+            ctx.drawImage(this.image, 
+                this.x, 
+                this.y,
+                this.width, this.height);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+    this.newPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+    }
+}
+function componentZom(width, height, color, x, y, type) {
+  if (type == "image") {
+    this.image = new Image();
+    this.image.src = color;
+  }
+  this.type = type
+  this.width = width;
+  this.height = height;
+  this.speedX = 0;
+  this.speedY = 0;
+  this.x = x;
+  this.y = y;
+  this.update = function() {
+        ctx = myGameArea.context;
+        if (type === "image") {
+            ctx.drawImage(this.image, 
+                this.x, 
+                this.y,
+                this.width, this.height);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    } 
+  this.newPos = function() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+  }
+  this.crashWith = function(otherobj) {
+    var myleft = this.x;
+    var myright = this.x + (this.width);
+    var mytop = this.y;
+    var mybottom = this.y + (this.height);
+    var otherleft = otherobj.x;
+    var otherright = otherobj.x + (otherobj.width);
+    var othertop = otherobj.y;
+    var otherbottom = otherobj.y + (otherobj.height);
+    var crash = true;
+    if ((mybottom < othertop) ||
+    (mytop > otherbottom) ||
+    (myright < otherleft) ||
+    (myleft > otherright)) {
+      crash = false;
+    }
+    return crash;
+  }
+}
+function speedUp() {
+  if (zombiesKilled % 10 === 0) {
+  zombie1.speedX -= 0.1
+  zombie2.speedX -= 0.1
+  zombie3.speedX += 0.1
+  zombie4.speedX += 0.1
+  }
+}
+let dead = 0
+let row = Math.ceil(Math.random() * 6)
+var zombsIG = document.getElementById("zombsIG");
+function updateGameArea() {
+    zombsIG.innerHTML = zombiesKilled
+    myGameArea.clear();
+    boxMomentLol.newPos();    
+    boxMomentLol.update();
+    sandbag1.newPos();
+    sandbag1.update();
+    sandbag2.newPos();
+    sandbag2.update();
+    zombie1.newPos();
+    zombie1.update();
+  	zombie2.newPos();
+  	zombie2.update();
+    zombie3.newPos();
+    zombie3.update();
+  	zombie4.newPos();
+  	zombie4.update();
+    pewPew.newPos();
+    pewPew.update();
+    if (animationState === 0) {
+      animationState = 1
+      animation()
+    }
+    if (sandbag1.crashWith(zombie1)) {
+      zombie1.x = 2000
+      zombie2.x = 2000
+      zombie3.x = 2000
+      zombie4.x = 200
+      location.reload();
+    }
+	  if (sandbag1.crashWith(zombie2)) {
+      zombie1.x = 2000
+      zombie2.x = 2000
+      zombie3.x = 2000
+      zombie4.x = 2000
+      location.reload();
+    }
+    if (sandbag2.crashWith(zombie3)) {
+      zombie1.x = 2000
+      zombie2.x = 2000
+      zombie3.x = 2000
+      zombie4.x = 2000
+      location.reload();
+    }
+	  if (sandbag2.crashWith(zombie4)) {
+      zombie1.x = 2000
+      zombie2.x = 2000
+      zombie3.x = 2000
+      zombie4.x = 2000
+      location.reload();
+    }
+    if (zombie1.crashWith(pewPew)) {
+      pewPew.x = 2000
+	    pewPew.speedX = 0
+      useFunc = 1
+      zombie1.x = 480
+      row = Math.ceil(Math.random() * 6)
+      if (row === 1) {
+        zombie1.y = 9
+      } else if (row === 2) {
+        zombie1.y = 51
+      } else if (row === 3) {
+        zombie1.y = 93
+      } else if (row === 4) {
+        zombie1.y = 135
+      } else if (row === 5) {
+        zombie1.y = 177
+      } else if (row === 6) {
+        zombie1.y = 219
+      }
+      speedUp()
+      zombiesKilled += 1;
+    }
+    if (zombie2.crashWith(pewPew)) {
+      pewPew.x = 2000
+      pewPew.speedX = 0
+	    useFunc = 1
+      zombie2.x = 480
+      zombiesKilled += 1;
+      row = Math.ceil(Math.random() * 6)
+      if (row === 1) {
+        zombie2.y = 9
+      } else if (row === 2) {
+        zombie2.y = 51
+      } else if (row === 3) {
+        zombie2.y = 93
+      } else if (row === 4) {
+        zombie2.y = 135
+      } else if (row === 5) {
+        zombie2.y = 177
+      } else if (row === 6) {
+        zombie2.y = 219
+      }
+     speedUp()
+    }
+    if (zombie3.crashWith(pewPew)) {
+      pewPew.x = 2000
+	  pewPew.speedX = 0
+      useFunc = 1
+      zombie3.x = -39
+      zombiesKilled += 1;
+      row = Math.ceil(Math.random() * 6)
+      if (row === 1) {
+        zombie3.y = 9
+      } else if (row === 2) {
+        zombie3.y = 51
+      } else if (row === 3) {
+        zombie3.y = 93
+      } else if (row === 4) {
+        zombie3.y = 135
+      } else if (row === 5) {
+        zombie3.y = 177
+      } else if (row === 6) {
+        zombie3.y = 219
+      }
+     speedUp()
+    }
+    if (zombie4.crashWith(pewPew)) {
+      pewPew.x = 2000
+	  pewPew.speedX = 0
+      useFunc = 1
+      zombie4.x = -39
+      zombiesKilled += 1;
+      row = Math.ceil(Math.random() * 6)
+      if (row === 1) {
+        zombie4.y = 9
+      } else if (row === 2) {
+        zombie4.y = 51
+      } else if (row === 3) {
+        zombie4.y = 93
+      } else if (row === 4) {
+        zombie4.y = 135
+      } else if (row === 5) {
+        zombie4.y = 177
+      } else if (row === 6) {
+        zombie4.y = 219
+      }
+     speedUp()
+    }
+}
+
+let tile = 1
+function moveup() {
+  if (tile === 1) {
+    tile = 6
+    boxMomentLol.y = 219
+  } else if (tile != 1) {
+    boxMomentLol.y -= 42
+    tile -= 1
+  }
+}
+
+function movedown() {
+  if (tile === 1) {
+    tile = 2
+    boxMomentLol.y += 42
+  } else if (tile != 6) {
+    boxMomentLol.y = boxMomentLol.y + 42
+    tile += 1
+  } else if (tile === 6) {
+    boxMomentLol.y = 9
+    tile = 1
+  }
+}
+
+function moveleft() {
+    boxMomentLol.speedX = -3; 
+}
+
+function moveright() {
+    boxMomentLol.speedX = 3; 
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === 's') {
+      if (dead === 0) {
+        movedown();
+      }
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === 'w') {
+      if (dead === 0) {
+        moveup();
+      }
+    }
+});
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+let useFunc = 1
+document.addEventListener('keydown', function() {
+  if (event.key === 'e') {
+    if (useFunc === 1) {
+      if (dead === 0) {
+        shootRight()
+        useFunc = 0
+      }
+    }
+  }
+});
+
+document.addEventListener('keydown', function() {
+  if (event.key === 'q') {
+    if (useFunc === 1) {
+      if (dead === 0) {
+        shootLeft()
+        useFunc = 0
+      }
+    }
+  }
+});
+
+document.addEventListener('keyup', function() {
+  if (event.key === 'h') {
+    console.log(boxMomentLol.x)
+    console.log(boxMomentLol.y)
+  }
+});
+
+async function shootRight() {
+  shootAnim(1)
+  pewPew.x = boxMomentLol.x + 12.5;
+  pewPew.y = boxMomentLol.y + 6.25;
+  pewPew.speedX = 11;
+  boxMomentLol.image.src = "./charRight.png";
+  pewPew.image.src = "./bulletRight.png";
+  await sleep((450))
+  useFunc = 1
+}
+async function shootLeft() {
+  shootAnim(0)
+  pewPew.x = boxMomentLol.x + 12.5;
+  pewPew.y = boxMomentLol.y + 6.25;
+  pewPew.speedX = -11;
+  boxMomentLol.image.src = "./charLeft.png";
+  pewPew.image.src = "./bulletLeft.png";
+  await sleep(450)
+  useFunc = 1
+}
+
+</script>

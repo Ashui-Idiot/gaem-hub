@@ -1,0 +1,449 @@
+<body onLoad="startGame()">
+<style>
+.imgE {
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    left: 47%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.lineThing {
+    margin: 0;
+    position: absolute;
+    top: 10%;
+    left: 48%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.button {
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 48%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.char_1 {
+    margin: 0;
+    position: absolute;
+    top: 6%;
+    left: 38.4%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.char_2 {
+    margin: 0;
+    position: absolute;
+    top: 6%;
+    left: 41.5%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.char_3 {
+    margin: 0;
+    position: absolute;
+    top: 6%;
+    left: 44.5%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.char_4 {
+    margin: 0;
+    position: absolute;
+    top: 6%;
+    left: 47.9%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.char_5 {
+    margin: 0;
+    position: absolute;
+    top: 6%;
+    left: 51.1%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.char_6 {
+    margin: 0;
+    position: absolute;
+    top: 6%;
+    left: 54.3%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.char_7 {
+    margin: 0;
+    position: absolute;
+    top: 6%;
+    left: 57.7%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.letterPres {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 47%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+</style>
+<p style="font-family:arial"; id="char1"; class="char_1"></p>
+<p style="font-family:arial"; id="char2"; class="char_2"></p>
+<p style="font-family:arial"; id="char3"; class="char_3"></p>
+<p style="font-family:arial"; id="char4"; class="char_4"></p>
+<p style="font-family:arial"; id="char5"; class="char_5"></p>
+<p style="font-family:arial"; id="char6"; class="char_6"></p>
+<p style="font-family:arial"; id="char7"; class="char_7"></p>
+<p style="font-family:arial; font-size:20px";, class="char_1"; id="line1"></p>
+<p style="font-family:arial; font-size:20px";, class="char_2"; id="line2"></p>
+<p style="font-family:arial; font-size:20px";, class="char_3"; id="line3"></p>
+<p style="font-family:arial; font-size:20px";, class="char_4"; id="line4"></p>
+<p style="font-family:arial; font-size:20px";, class="char_5"; id="line5"></p>
+<p style="font-family:arial; font-size:20px";, class="char_6"; id="line6"></p>
+<p style="font-family:arial; font-size:20px";, class="char_7"; id="line7"></p> <!--btw here for later. ¯-->
+<img id="imgLmao"; src="./EmptyGal.png"; class="imgE">
+<p style="font-family:arial; font-size:20px";, class="letterPres"; id="lettersPres"></p>
+<a href=".\index.html">
+<button style="font-family:arial; font-size:20px";, class="button">go to home</button>
+</a>
+<script>
+    let char1 = document.getElementById("char1")
+	    let char2 = document.getElementById("char2")
+	    let char3 = document.getElementById("char3")
+	    let char4 = document.getElementById("char4")
+	    let char5 = document.getElementById("char5")
+	    let char6 = document.getElementById("char6")
+  	  let char7 = document.getElementById("char7")
+      let line1 = document.getElementById("line1")
+      let line2 = document.getElementById("line2")
+      let line3 = document.getElementById("line3")
+      let line4 = document.getElementById("line4")
+      let line5 = document.getElementById("line5")
+      let line6 = document.getElementById("line6")
+      let line7 = document.getElementById("line7")
+      let image = document.getElementById("imgLmao")
+      let letterAmnt = document.getElementById("lettersPres")
+      let somethingChanged = 0
+      const wow = {
+	      letter1: "w",
+        pos1: char3,
+        letter2: "o",
+        pos2: char4,
+        letter3: "w",
+        pos3: char5,
+      };
+	    const sus = {
+	      letter1: "s",
+        pos1: char3,
+        letter2: "u",
+        pos2: char4,
+        letter3: "s",
+        pos3: char5,
+      };
+	    const gun = {
+	      letter1: "g",
+        pos1: char3,
+        letter2: "u",
+        pos2: char4,
+        letter3: "n",
+        pos3: char5,
+      };
+      const sussy = {
+	      letter1: "s",
+        pos1: char2,
+        letter2: "u",
+        pos2: char3,
+        letter3: "s",
+        pos3: char4,
+        letter4: "s",
+        pos4: char5,
+        letter5: "y",
+        pos5: char6,
+      };
+	    const laugh = {
+	      letter1: "l",
+        pos1: char2,
+        letter2: "a",
+        pos2: char3,
+        letter3: "u",
+        pos3: char4,
+        letter4: "g",
+        pos4: char5,
+        letter5: "h",
+        pos5: char6,
+      };
+	    const death = {
+	      letter1: "d",
+        pos1: char2,
+        letter2: "e",
+        pos2: char3,
+        letter3: "a",
+        pos3: char4,
+        letter4: "t",
+        pos4: char5,
+        letter5: "h",
+        pos5: char6,
+      };
+      const stabbed = {
+	      letter1: "s",
+        pos1: char1,
+        letter2: "t",
+        pos2: char2,
+        letter3: "a",
+        pos3: char3,
+        letter4: "b",
+        pos4: char4,
+        letter5: "b",
+        pos5: char5,
+        letter6: "e",
+        pos6: char6,
+        letter7: "d",
+        pos7: char7,
+      };
+	    const execute = {
+	      letter1: "e",
+        pos1: char1,
+        letter2: "x",
+        pos2: char2,
+        letter3: "e",
+        pos3: char3,
+        letter4: "c",
+        pos4: char4,
+        letter5: "u",
+        pos5: char5,
+        letter6: "t",
+        pos6: char6,
+        letter7: "e",
+        pos7: char7,
+      };
+	    const destroy = {
+	      letter1: "d",
+        pos1: char1,
+        letter1: "e",
+        pos2: char2,
+        letter1: "s",
+        pos3: char3,
+        letter1: "t",
+        pos4: char4,
+        letter1: "r",
+        pos5: char5,
+        letter6: "o",
+        pos6: char6,
+        letter7: "y",
+        pos7: char7,
+      };
+      const wordList = {
+          placeholder: "KAI SUCKS LMAOOOOO", //absolutely right ;) -kai; also thats placeholder -ashia;
+          a1: wow, //3 letter segment
+          a2: sus,
+          a3: gun,
+          a4: sussy, //5 letter segment
+          a5: laugh,
+          a6: death,
+          a7: stabbed, //7 letter segment
+          a8: execute, //order 66. kill the children.
+          a9: destroy,
+      }
+      let wordnum = Math.floor(Math.random() * 9)
+      let word;
+      let attempts = 0;
+      function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+      async function startGame() {
+        sleep(10)
+      if (wordnum == 1) {
+        word = wordList.a1
+        line3.innerHTML = "_";
+        line4.innerHTML = "_";
+        line5.innerHTML = "_";
+      }
+      if (wordnum == 4) {
+        word = wordList.a4
+        line2.innerHTML = "_";
+        line3.innerHTML = "_";
+        line4.innerHTML = "_";
+        line5.innerHTML = "_";
+        line6.innerHTML = "_";
+      }
+      if (wordnum == 7) {
+        word = wordList.a7
+        line1.innerHTML = "_";
+        line2.innerHTML = "_";
+        line3.innerHTML = "_";
+        line4.innerHTML = "_";
+        line5.innerHTML = "_";
+        line6.innerHTML = "_";
+        line7.innerHTML = "_";
+      }
+      if (wordnum == 2) {
+        word = wordList.a2
+        line3.innerHTML = "_";
+        line4.innerHTML = "_";
+        line5.innerHTML = "_";
+      }
+      if (wordnum == 5) {
+        word = wordList.a5
+        line2.innerHTML = "_";
+        line3.innerHTML = "_";
+        line4.innerHTML = "_";
+        line5.innerHTML = "_";
+        line6.innerHTML = "_";
+      }
+      if (wordnum == 8) {
+        word = wordList.a8
+        line1.innerHTML = "_";
+        line2.innerHTML = "_";
+        line3.innerHTML = "_";
+        line4.innerHTML = "_";
+        line5.innerHTML = "_";
+        line6.innerHTML = "_";
+        line7.innerHTML = "_";
+      }
+      if (wordnum == 3 ) {
+        word = wordList.a3
+        line3.innerHTML = "_";
+        line4.innerHTML = "_";
+        line5.innerHTML = "_";
+      }
+      if (wordnum == 6 ) {
+        word = wordList.a6
+        line2.innerHTML = "_";
+        line3.innerHTML = "_";
+        line4.innerHTML = "_";
+        line5.innerHTML = "_";
+        line6.innerHTML = "_";
+      }
+      if (wordnum == 9 ) {
+        word = wordList.a9
+        line1.innerHTML = "_";
+        line2.innerHTML = "_";
+        line3.innerHTML = "_";
+        line4.innerHTML = "_";
+        line5.innerHTML = "_";
+        line6.innerHTML = "_";
+        line7.innerHTML = "_";
+      }
+    }
+    let waitThing = 0;
+    async function increaseThing() {
+    if (somethingChanged == 0) {
+    if (waitThing != 7) {
+      waitThing += 1
+    } else if (attempts == 0) {
+        somethingChanged = 0
+        waitThing = 0
+        image.src = "./HeadGal.png"
+        attempts += 1;
+        letterAmnt.innerHTML = letterAmnt.innerHTML + letter + " "
+    } else if (attempts == 1) {
+        somethingChanged = 0
+        waitThing = 0
+        image.src = "./BodyGal.png"
+        attempts += 1;
+        letterAmnt.innerHTML = letterAmnt.innerHTML + letter + " "
+    }  else if (attempts == 2) {
+        somethingChanged = 0
+        waitThing = 0
+        image.src = "./ArmGal1.png"
+        attempts += 1;
+        letterAmnt.innerHTML = letterAmnt.innerHTML + letter + " "
+        }  else if (attempts == 3) {
+        somethingChanged = 0
+            waitThing = 0
+        image.src = "./ArmGal.png"
+        attempts += 1;
+        letterAmnt.innerHTML = letterAmnt.innerHTML + letter + " "
+    }  else if (attempts == 4) {
+        waitThing = 0
+        somethingChanged = 0
+        image.src = "./LegGal1.png"
+        attempts += 1;
+    } else if (attempts == 5) {
+        waitThing = 0
+        somethingChanged = 0
+        image.src = "./LegGal.png"
+        attempts += 1;
+        letterAmnt.innerHTML = "you failed! refreshing now!"
+        await sleep(1000)
+        location.reload()
+    }
+  }
+    }
+async function checkerThing(letter) {
+    let letErYo = letter
+    if (word.letter1 == letErYo) {
+      if (attempts != 6) {
+        somethingChanged = 1
+        word.pos1.innerHTML = word.letter1
+      }
+    } else {await increaseThing()}
+    if (word.letter2 == letErYo) {
+      if (attempts != 6) {
+        somethingChanged = 1
+        word.pos2.innerHTML = word.letter2
+      }
+    } else {await increaseThing()}
+    if (word.letter3 == letErYo) {
+      if (attempts != 6) {
+        somethingChanged = 1
+        word.pos3.innerHTML = word.letter3
+      }
+    } else {await increaseThing()}
+    if (word.letter4 == letErYo) {
+      if (attempts != 6) {
+        somethingChanged = 1
+        word.pos4.innerHTML = word.letter4
+      }
+    } else {await increaseThing()}
+    if (word.letter5 == letErYo) {
+      if (attempts != 6) {
+        somethingChanged = 1
+        word.pos5.innerHTML = word.letter5
+      }
+    } else {await increaseThing()}
+    if (word.letter6 == letErYo) {
+      if (attempts != 6) {
+        somethingChanged = 1
+        word.pos6.innerHTML = word.letter6
+      }
+    } else {await increaseThing()}
+    if (word.letter7 == letErYo) {
+      if (attempts != 6) {
+        word.pos7.innerHTML = word.letter7
+        somethingChanged = 1
+      }
+    } else {await increaseThing()}
+    if (wordnum == 7 || wordnum == 8 || wordnum == 9) {
+    if (word.letter1 == word.pos1.innerHTML && word.letter2 == word.pos2.innerHTML && word.letter3 == word.pos3.innerHTML && word.letter4 == word.pos4.innerHTML && word.letter5 == word.pos5.innerHTML && word.letter6 == word.pos6.innerHTML && word.letter7 == word.pos7.innerHTML) {
+      letterAmnt.innerHTML = "Congrats you won."
+      await sleep(5000)
+      location.reload()
+    } 
+    }
+    if (wordnum == 4 || wordnum == 5 || wordnum == 6) {
+    if (word.letter1 == word.pos1.innerHTML && word.letter2 == word.pos2.innerHTML && word.letter3 == word.pos3.innerHTML && word.letter4 == word.pos4.innerHTML && word.letter5 == word.pos5.innerHTML) {
+      letterAmnt.innerHTML = "Congrats you won."
+      await sleep(5000)
+      location.reload()
+    }
+  }
+    if (wordnum == 1 || wordnum == 2 || wordnum == 3) {
+    if (word.letter1 == word.pos1.innerHTML && word.letter2 == word.pos2.innerHTML && word.letter3 == word.pos3.innerHTML) {
+      letterAmnt.innerHTML = "Congrats you won."
+      await sleep(5000)
+      location.reload()
+    }
+  }
+  somethingChanged = 0
+}
+document.addEventListener('keyup', function(event) {
+  if (event.key != "Control" && event.key != "Shift")
+    sleep(10)
+  checkerThing(event.key)
+  console.log("test")
+});
+</script>
+</body>
